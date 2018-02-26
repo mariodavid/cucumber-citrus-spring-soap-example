@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:citrus="http://www.citrusframework.org/schema/config"
+       xmlns:citrus-http="http://www.citrusframework.org/schema/http/config"
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.citrusframework.org/schema/config http://www.citrusframework.org/schema/config/citrus-config.xsd
+       http://www.citrusframework.org/schema/http/config http://www.citrusframework.org/schema/http/config/citrus-http-config.xsd
+       http://www.springframework.org/schema/oxm
+       http://www.springframework.org/schema/oxm/spring-oxm.xsd">
+
+  <context:annotation-config/>
+
+  <!-- JavaConfig bean post-processor -->
+  <bean class="org.springframework.context.annotation.ConfigurationClassPostProcessor"/>
+
+  <!-- Citrus Java config -->
+  <bean id="citrusSpringConfig" class="com.consol.citrus.config.CitrusSpringConfig"/>
+
+
+
+  <!-- XML marshalling/unmarshalling -->
+  <oxm:jaxb2-marshaller id="marshaller" context-path="org.citrusframework.samples.todolist"/>
+
+  <bean id="unmarshallingTransformer" class="org.springframework.integration.xml.transformer.UnmarshallingTransformer">
+    <constructor-arg>
+      <ref bean="marshaller"/>
+    </constructor-arg>
+  </bean>
+
+  <bean id="marshallingTransformer" class="org.springframework.integration.xml.transformer.MarshallingTransformer">
+    <constructor-arg>
+      <ref bean="marshaller"/>
+    </constructor-arg>
+    <constructor-arg>
+      <bean class="org.springframework.integration.xml.transformer.ResultToStringTransformer"/>
+    </constructor-arg>
+  </bean>
+</beans>
