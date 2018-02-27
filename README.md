@@ -1,14 +1,24 @@
 Cucumber, Citrus, Spring, SOAP example
 ==============
 
-Run
----------
+This is an example that showscase to show how to build a proper Java based test client for integration / functional tests.
+
+It uses the following technologies:
+
+* Cucumber
+* Citrusframework
+* Spring
+* SOAP based webservices
+
+
+NOTE: Most of the code is copied from https://github.com/christophd/citrus-samples
+
 
 System under test
 ---------
 
-The sample uses a small todo list application as system under test. The application is a web application
-that you can deploy on any web container. You can find the todo-list sources [here](../todo-app). Up to now we have started an 
+The sample test client uses a small todo list application as system under test. The application is a web application
+that you can deploy on any web container. You can find the todo-list sources [here](https://github.com/christophd/citrus-samples/tree/master/todo-app). Up to now we have started an 
 embedded Jetty web container with automatic deployments during the Maven build lifecycle. This approach is fantastic 
 when running automated tests in a continuous build.
   
